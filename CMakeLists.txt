@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(cs210_Assignment3 main.cpp
         ArrayList.h
         Node.h
-        Data.cpp
         LinkedList.h
         List.h
 )
