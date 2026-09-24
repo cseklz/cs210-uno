@@ -2,6 +2,12 @@
 #include <memory>
 
 template <typename T>
+class ArrayList;
+
+template <typename T>
+class LinkedList;
+
+template <typename T>
 class List {
 public:
 	virtual ~List() = default;

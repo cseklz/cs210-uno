@@ -1,15 +1,14 @@
 #pragma once
 
-#include "List.h"
 #include <iostream>
-using namespace std;
+#include "List.h"
 
 template <typename T>
 class ArrayList : public List<T> {
 public:
 	void addFront(T* value) override {
-		if (size_ == CAPACITY) {
-			cout << "ArrayList is full." << endl;
+		if (size_ >= CAPACITY) {
+			std::cout << "ArrayList is full." << std::endl;
 			return;
 		}
 
@@ -23,7 +22,7 @@ public:
 
 	void deleteFront() override {
 		if (size_ == 0) {
-			cout << "ArrayList is empty." << endl;
+			std::cout << "ArrayList is empty." << std::endl;
 			return;
 		}
 
@@ -47,10 +46,10 @@ public:
 
 	void print() const override {
 		for (int i = 0; i < size_; ++i) {
-			cout << *data_[i] << ",";
+			std::cout << *data_[i] << ",";
 		}
 
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	~ArrayList() override {

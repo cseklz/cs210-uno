@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Node.h"
 #include <iostream>
-using namespace std;
+#include "List.h"
+#include "Node.h"
 
 template <typename T>
 class LinkedList : public List<T> {
@@ -10,14 +10,14 @@ public:
 	LinkedList() : head_(nullptr) {}
 
 	void addFront(T* value) override {
-		auto fresh = new Node<T>(value);
+		Node<T>* fresh = new Node<T>(value);
 		fresh->next = head_;
 		head_ = fresh;
 	}
 
 	void deleteFront() override {
 		if (head_ == nullptr) {
-			cout << "LinkedList is empty." << endl;
+			std::cout << "LinkedList is empty." << std::endl;
 			return;
 		}
 
@@ -43,11 +43,11 @@ public:
 	void print() const override {
 		Node<T>* current = head_;
 		while (current != nullptr) {
-			cout << *current->data << ",";
+			std::cout << *current->data << ",";
 			current = current->next;
 		}
 
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	~LinkedList() override {
