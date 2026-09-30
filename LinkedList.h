@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include "List.h"
 #include "Node.h"
 
 template <typename T>
@@ -10,7 +9,7 @@ public:
 	LinkedList() : head_(nullptr) {}
 
 	void addFront(T* value) override {
-		Node<T>* fresh = new Node<T>(value);
+		auto fresh = new Node<T>(value);
 		fresh->next = head_;
 		head_ = fresh;
 	}
