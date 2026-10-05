@@ -11,7 +11,7 @@ int main() {
 	list->print();
 
 	int key = 20;
-	std::cout << "search(20): " << (list->search(&key) ? "found" : "not found") << std::endl;
+	std::cout << "search(20): "		<< (list->search(&key) ? "found" : "not found") << std::endl;
 	list->deleteFront();
 	list->print();
 

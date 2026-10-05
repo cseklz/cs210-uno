@@ -12,6 +12,7 @@ public:
 		auto fresh = new Node<T>(value);
 		fresh->next = head_;
 		head_ = fresh;
+		++size_;
 	}
 
 	void deleteFront() override {
@@ -24,9 +25,15 @@ public:
 		head_ = head_->next;
 		delete doomed->data;
 		delete doomed;
+		--size_;
 	}
 
 	void addAnywhere(int position, T* value) override {
+		if (position < 0 || position > size_) {
+			std::cout << "Position out of bounds." << std::endl;
+			return;
+		}
+
 		if (position == 0) {
 			addFront(value);
 			return;
@@ -40,6 +47,30 @@ public:
 		auto fresh = new Node<T>(value);
 		fresh->next = current->next;
 		current->next = fresh;
+		++size_;
+	}
+
+	void deleteAnywhere(int position) override {
+		if (position < 0 || position >= size_) {
+			std::cout << "Position out of bounds." << std::endl;
+			return;
+		}
+
+		if (position == 0) {
+			deleteFront();
+			return;
+		}
+
+		auto current = head_;
+		for (int i = 0; i < position - 1 && current != nullptr; ++i) {
+			current = current->next;
+		}
+
+		auto doomed = current->next;
+		current->next = doomed->next;
+		delete doomed->data;
+		delete doomed;
+		--size_;
 	}
 
 	bool search(T* value) const override {
@@ -76,4 +107,5 @@ public:
 
 private:
 	Node<T>* head_;
+	int size_{};
 };
