@@ -62,8 +62,7 @@ public:
 	}
 
 	void reverse() override {
-		if (size_ == 0) {
-			std::cout << "ArrayList is empty." << std::endl;
+		if (size_ <= 1) {
 			return;
 		}
 

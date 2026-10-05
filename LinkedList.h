@@ -73,6 +73,21 @@ public:
 		--size_;
 	}
 
+	void reverse() override {
+		Node<T>* current = head_;
+		Node<T>* previous = nullptr;
+		Node<T>* next = nullptr;
+
+		while (current != nullptr) {
+			next = current->next;
+			current->next = previous;
+			previous = current;
+			current = next;
+		}
+
+		head_ = previous;
+	}
+
 	bool search(T* value) const override {
 		Node<T>* current = head_;
 		while (current != nullptr) {
