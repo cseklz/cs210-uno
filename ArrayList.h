@@ -33,6 +33,59 @@ public:
 		--size_;
 	}
 
+	void addAnywhere(int position, T* value) override {
+		if (size_ >= CAPACITY || size_ < position || position < 0) {
+			std::cout << "ArrayList is full or position outside range." << std::endl;
+			return;
+		}
+
+		for (int i = size_; i > position; --i) {
+			data_[i] = data_[i - 1];
+		}
+
+		data_[position] = value;
+		++size_;
+	}
+
+	void deleteAnywhere(int index) override {
+		if (size_ == 0) {
+			std::cout << "ArrayList is empty." << std::endl;
+			return;
+		}
+
+		delete data_[index];
+		for (int i = index; i < size_ - 1; ++i) {
+			data_[i] = data_[i + 1];
+		}
+
+		--size_;
+	}
+
+	void reverse() override {
+		if (size_ == 0) {
+			std::cout << "ArrayList is empty." << std::endl;
+			return;
+		}
+
+		for (int i = 0; i < size_ / 2; ++i) {
+			T* temp = data_[i];
+			data_[i] = data_[size_ - i - 1];
+			data_[size_ - i - 1] = temp;
+		}
+	}
+
+	void concat(List<T>* list) override {
+		int listSize = size_ + list->size_;
+		if (listSize >= CAPACITY) {
+			std::cout << "ArrayList is full." << std::endl;
+			return;
+		}
+
+		for (int i = size_; i < listSize; ++i) {
+			data_[i] = list->data_[i - size_];
+		}
+	}
+
 	bool search(T* value) const override {
 		for (int i = 0; i < size_; ++i) {
 			if (*data_[i] == *value) {

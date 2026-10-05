@@ -26,6 +26,28 @@ public:
 		delete doomed;
 	}
 
+	void addAnywhere(int position, T* value) override {
+		auto fresh = new Node<T>(value);
+
+		if (position == 0) {
+			addFront(value);
+			return;
+		}
+
+		for (int i = 0; i < position - 1 && head_ != nullptr; ++i) {
+			head_ = head_->next;
+		}
+
+		if (head_ == nullptr) {
+			std::cout << "Position out of bounds." << std::endl;
+			delete fresh;
+			return;
+		}
+
+		fresh->next = head_->next;
+		head_->next = fresh;
+	}
+
 	bool search(T* value) const override {
 		Node<T>* current = head_;
 		while (current != nullptr) {

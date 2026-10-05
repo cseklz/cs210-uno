@@ -8,4 +8,5 @@ add_executable(cs210_Assignment3 main.cpp
         Node.h
         LinkedList.h
         List.h
+        Player.h
 )
