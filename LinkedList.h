@@ -27,25 +27,19 @@ public:
 	}
 
 	void addAnywhere(int position, T* value) override {
-		auto fresh = new Node<T>(value);
-
 		if (position == 0) {
 			addFront(value);
 			return;
 		}
 
-		for (int i = 0; i < position - 1 && head_ != nullptr; ++i) {
-			head_ = head_->next;
+		auto current = head_;
+		for (int i = 0; i < position - 1 && current != nullptr; ++i) {
+			current = current->next;
 		}
 
-		if (head_ == nullptr) {
-			std::cout << "Position out of bounds." << std::endl;
-			delete fresh;
-			return;
-		}
-
-		fresh->next = head_->next;
-		head_->next = fresh;
+		auto fresh = new Node<T>(value);
+		fresh->next = current->next;
+		current->next = fresh;
 	}
 
 	bool search(T* value) const override {
