@@ -74,23 +74,24 @@ public:
 	}
 
 	void concat(List<T>* other) override {
-		if (dynamic_cast<ArrayList<T>*>(other) == nullptr) {
+		auto* otherList = dynamic_cast<ArrayList<T>*>(other);
+		if (otherList == nullptr) {
 			std::cout << "Not an ArrayList." << std::endl;
 			return;
 		}
 
-		if (size_ + other->size_ > CAPACITY) {
+		if (size_ + otherList->size_ > CAPACITY) {
 			std::cout << "ArrayList is full." << std::endl;
 			return;
 		}
 
-		for (int i = 0; i < other->size_; ++i) {
-			data_[size_ + i] = other->data_[i];
-			delete other->data_[i];
+		for (int i = 0; i < otherList->size_; ++i) {
+			data_[size_ + i] = otherList->data_[i];
+			otherList->data_[i] = nullptr; // Clear pointer, DO NOT delete the data!
 		}
 
-		size_ += other->size_;
-		other->size_ = 0;
+		size_ += otherList->size_;
+		otherList->size_ = 0;
 	}
 
 	bool search(T* value) const override {
