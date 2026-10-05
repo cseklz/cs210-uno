@@ -37,13 +37,11 @@ int main() {
 	std::cout << "Current turn order: ";
 	players->print();
 
-	// 2. A new player pulls up a chair and joins mid-order, not at the front, using addAnywhere.
 	std::cout << "\n--- Step 2: Adele joins mid-order at position 2 ---" << std::endl;
 	players->addAnywhere(2, new Player(5, "Adele"));
 	std::cout << "Turn order after Adele joins: ";
 	players->print();
 
-	// 3. Someone plays a Reverse card, using reverse, and you print the turn order before and after.
 	std::cout << "\n--- Step 3: Kai plays a Reverse card! ---" << std::endl;
 	std::cout << "Turn order before reverse: ";
 	players->print();
@@ -51,7 +49,6 @@ int main() {
 	std::cout << "Turn order after reverse:  ";
 	players->print();
 
-	// 4. A player runs out of cards and steps away from a position that isn't the front, using deleteAnywhere.
 	std::cout << "\n--- Step 4: Angel plays his last card and wins! Steps away from position 2 ---" << std::endl;
 	std::cout << "Turn order before winner leaves: ";
 	players->print();
@@ -59,7 +56,6 @@ int main() {
 	std::cout << "Turn order after winner leaves:  ";
 	players->print();
 
-	// 5. A second table, built separately, merges into the first using concat.
 	std::cout << "\n--- Step 5: Table 2 finishes early and merges into Table 1 ---" << std::endl;
 	std::unique_ptr<List<Player>> newPlayers = makeList<Player>();
 	newPlayers->addFront(new Player(13, "Steph"));
