@@ -88,6 +88,31 @@ public:
 		head_ = previous;
 	}
 
+	void concat(List<T>* other) override {
+		if (dynamic_cast<LinkedList<T>*>(other) == nullptr) {
+			std::cout << "Not a LinkedList." << std::endl;
+			return;
+		}
+
+		if (other->head_ == nullptr) {
+			return;
+		}
+
+		if (head_ == nullptr) {
+			head_ = other->head_;
+		} else {
+			Node<T>* current = head_;
+			while (current->next != nullptr) {
+				current = current->next;
+			}
+			current->next = other->head_;
+		}
+
+		size_ += other->size_;
+		other->head_ = nullptr;
+		other->size_ = 0;
+	}
+
 	bool search(T* value) const override {
 		Node<T>* current = head_;
 		while (current != nullptr) {

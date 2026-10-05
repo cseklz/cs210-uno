@@ -73,16 +73,24 @@ public:
 		}
 	}
 
-	void concat(List<T>* list) override {
-		int listSize = size_ + list->size_;
-		if (listSize >= CAPACITY) {
+	void concat(List<T>* other) override {
+		if (dynamic_cast<ArrayList<T>*>(other) == nullptr) {
+			std::cout << "Not an ArrayList." << std::endl;
+			return;
+		}
+
+		if (size_ + other->size_ > CAPACITY) {
 			std::cout << "ArrayList is full." << std::endl;
 			return;
 		}
 
-		for (int i = size_; i < listSize; ++i) {
-			data_[i] = list->data_[i - size_];
+		for (int i = 0; i < other->size_; ++i) {
+			data_[size_ + i] = other->data_[i];
+			delete other->data_[i];
 		}
+
+		size_ += other->size_;
+		other->size_ = 0;
 	}
 
 	bool search(T* value) const override {
