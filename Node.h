@@ -1,10 +1,10 @@
 #pragma once
 
-template <typename T>
+template<typename T>
 class Node {
 public:
-	T* data;
-	Node<T>* next;
+    T *data;
+    Node *next;
 
-	explicit Node(T* value) : data(value), next(nullptr) {}
+    explicit Node(T *value) : data(value), next(nullptr) {}
 };
