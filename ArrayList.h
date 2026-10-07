@@ -74,7 +74,7 @@ public:
 	}
 
 	void concat(List<T>* other) override {
-		auto* otherList = dynamic_cast<ArrayList<T>*>(other);
+		auto* otherList = dynamic_cast<ArrayList*>(other);
 		if (otherList == nullptr) {
 			std::cout << "Not an ArrayList." << std::endl;
 			return;
@@ -87,7 +87,7 @@ public:
 
 		for (int i = 0; i < otherList->size_; ++i) {
 			data_[size_ + i] = otherList->data_[i];
-			otherList->data_[i] = nullptr; // Clear pointer, DO NOT delete the data!
+			otherList->data_[i] = nullptr;
 		}
 
 		size_ += otherList->size_;

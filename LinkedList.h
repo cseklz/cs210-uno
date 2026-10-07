@@ -6,7 +6,7 @@
 template <typename T>
 class LinkedList : public List<T> {
 public:
-	LinkedList() : head_(nullptr) {}
+	LinkedList() : head_(nullptr), size_(0) {}
 
 	void addFront(T* value) override {
 		auto fresh = new Node<T>(value);
@@ -20,7 +20,6 @@ public:
 			std::cout << "LinkedList is empty." << std::endl;
 			return;
 		}
-
 		Node<T>* doomed = head_;
 		head_ = head_->next;
 		delete doomed->data;
@@ -28,7 +27,11 @@ public:
 		--size_;
 	}
 
-	void addAnywhere(int position, T* value) override {
+	T* getFront() {
+		return head_->data;
+	}
+
+	void addAnywhere(const int position, T* value) override {
 		if (position < 0 || position > size_) {
 			std::cout << "Position out of bounds." << std::endl;
 			return;
@@ -50,7 +53,7 @@ public:
 		++size_;
 	}
 
-	void deleteAnywhere(int position) override {
+	void deleteAnywhere(const int position) override {
 		if (position < 0 || position >= size_) {
 			std::cout << "Position out of bounds." << std::endl;
 			return;
@@ -89,7 +92,7 @@ public:
 	}
 
 	void concat(List<T>* other) override {
-		auto* otherList = dynamic_cast<LinkedList<T>*>(other);
+		auto* otherList = dynamic_cast<LinkedList*>(other);
 		if (otherList == nullptr) {
 			std::cout << "Not a LinkedList." << std::endl;
 			return;
@@ -112,6 +115,14 @@ public:
 		size_ += otherList->size_;
 		otherList->head_ = nullptr;
 		otherList->size_ = 0;
+	}
+
+	bool isEmpty() const {
+		return size_ == 0;
+	}
+
+	int size() const {
+		return size_;
 	}
 
 	bool search(T* value) const override {
@@ -147,6 +158,6 @@ public:
 	}
 
 private:
-	Node<T>* head_{};
-	int size_{};
+	Node<T>* head_;
+	int size_;
 };
