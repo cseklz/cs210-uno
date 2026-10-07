@@ -11,9 +11,9 @@ public:
 
   T* peek() const override { return list_.getFront(); }
 
-  bool isEmpty() const override { return list_.isEmpty(); }
+  [[nodiscard]] bool isEmpty() const override { return list_.isEmpty(); }
 
-  int size() const override { return list_.size(); }
+  [[nodiscard]] int size() const override { return list_.size(); }
 
   void print() const override { list_.print(); }
 

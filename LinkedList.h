@@ -27,8 +27,8 @@ public:
 		--size_;
 	}
 
-	T* getFront() {
-		return head_->data;
+	T* getFront() const {
+		return head_ == nullptr ? nullptr : head_->data;
 	}
 
 	void addAnywhere(const int position, T* value) override {
